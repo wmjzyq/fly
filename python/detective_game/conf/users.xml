@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<game-user>
+    <user key="direnjie">
+        <name>狄仁杰</name>
+        <alias>神探</alias>
+        <blood>200</blood>
+        <bluebuff>200</bluebuff>
+        <sword>令牌</sword>
+        <introduce>狄仁杰生来就在推理方面具有惊人才能，并演变为血液里流淌的本能。越是复杂的案件越能取悦他，并且不允许任何权势者干扰——他的个人美学。"罪犯们，你们已无路可逃！"</introduce>
+        <kongfu>{"迅捷":45, "王朝密令":60 ,"六令追凶":50, "逃脱": 55 }</kongfu>
+    </user>
+    <user key="liyuanfang">
+        <name> 李元芳</name>
+        <alias>童颜密探</alias>
+        <blood>200</blood>
+        <sword>飞轮</sword>
+        <kongfu>{"谍影重重":50, "无间锋刃":60 ,"刃遁":45, "凝神归元": 40 }</kongfu>
+        <introduce>如你所见，元芳乃魔种后裔，这对大耳朵就是抹不掉的证明。在看不见的角落里，却被可怕的男人胁迫从事包打听的行当。"秘密的密，探案的探！"</introduce>
+    </user>
+</game-user>
