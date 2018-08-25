@@ -1,0 +1,86 @@
+<script src="{{url_for('static', filename='jquery.min.js')}}"></script>
+<script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+<style>
+    .hand:hover{
+        cursor: pointer;
+    }
+</style>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">头条新闻</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+
+            <li><a href="/backfeed">用户反馈</a></li>
+
+            {% if session.get('username') == None %}
+            <li><a href="/register">注册</a></li>
+            <li><a href="/login">登录</a></li>
+            {% endif %}
+
+            {% if session.get('username') != None and session.get('status') == 'simple' %}
+            <li class="dropdown hand">
+                <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                    {{ session.get('username') }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="/info">查看信息</a></li>
+                    <li><a href="/change_info">修改密码</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/logout">退出登录</a></li>
+                </ul>
+            </li>
+            {% endif %}
+
+            {% if session.get('username') != None and session.get('status') == 'reporter' %}
+            <li><a href="/reporter_article_manager">管理文章</a></li>
+            <li><a href="/reporter_article_upload">发布文章</a></li>
+
+            <li class="dropdown hand">
+                <a class="dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                    {{ session.get('username') }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a href="/info">查看信息</a></li>
+                    <li><a href="/change_info">修改密码</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/logout">退出登录</a></li>
+                </ul>
+            </li>
+            {% endif %}
+
+            {% if session.get('username') != None and session.get('status') == 'admin' %}
+            <li><a href="/admin_article_manager">管理文章</a></li>
+            <li><a href="/admin_user_manager">管理用户</a></li>
+            <li><a href="/admin_backfeed_manager">查看反馈</a></li>
+
+            <li class="dropdown hand">
+                <a class="dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                    {{ session.get('username') }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                    <li><a href="/info">查看信息</a></li>
+                    <li><a href="/change_info">修改密码</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/logout">退出登录</a></li>
+                </ul>
+            </li>
+            {% endif %}
+        </ul>
+    </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

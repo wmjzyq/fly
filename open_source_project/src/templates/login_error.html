@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录失败</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="panel panel-danger">
+    <div class="panel-heading">
+        <h3 class="panel-title">用户名或密码错误</h3>
+    </div>
+    <div class="panel-body">
+        <a href="/">返回首页</a> <a href="/login">重新登录</a>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布成功</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">恭喜，文章发布成功</h3>
+        </div>
+        <div class="panel-body">
+            <a href="/">返回首页</a>
+            <a href="/article_upload">继续发布文章</a>
+            <a href="/reporter_article_manager">管理文章</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

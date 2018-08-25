@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章详情</title>
+    <script src="../static/jquery-3.3.1.js" type="text/javascript"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <style>
+        .split {
+            display: inline-block;
+            height: 50px;
+            width: 10%;
+            margin-bottom: 20px;
+        }
+
+        .split a {
+            text-decoration: none;
+            text-underline: none;
+            line-height: 50px;
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .split a:hover {
+            background-color: #dddddd;
+        }
+        .constrain{
+            width: 60%;
+        }
+        p{
+            font-size: 16px;
+            line-height: 30px;
+        }
+        img{
+            margin-top: 20px;
+            display: block;
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+        h1{
+            font-size: 25px;
+        }
+    </style>
+    <script>
+
+        function check_content(){
+            var content = $.trim($('#content1').val());
+            if (content == ''){
+                $('#tishi2').html('内容不能为空');
+                $('#tishi2').css("color","red");
+                return false;
+            }
+             else{
+                $('#tishi2').html('');
+            }
+        }
+
+        function check(){
+            var content = $.trim($("#content1").val());
+
+            if (content != ''){
+                $("#name").removeAttr("required");
+                $("#content1").removeAttr("required");
+            }
+            else{
+                $("#name").attr("required", "required");
+                $("#content1").attr("required", "required");
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+{% include "nav.html" %}
+
+<div class="container">
+    <div class="split"><a href="/news_society">社会</a></div>
+    <div class="split"><a href="/news_entertainment">娱乐</a></div>
+    <div class="split"><a href="/news_military">军事</a></div>
+    <div class="split"><a href="/news_tech">科技</a></div>
+    <div class="split"><a href="/news_sports">体育</a></div>
+    <div class="split"><a href="/news_finance">财经</a></div>
+    <div class="split"><a href="/news_world">国际</a></div>
+    <div class="split"><a href="/news_history">历史</a></div>
+    <div class="split"><a href="/news_regimen">养生</a></div>
+</div>
+
+<div class="container constrain	">
+    <h1>{{article.title}}</h1>
+    <div id="content">
+        <p style="font-size: 15px; color: #777;"> {{article.detail_source | safe}}   {{article.time | safe}} </p>
+        {{article.content | safe}}
+    </div>
+
+     <hr/>
+
+    <!--发表评论-->
+    <h3>发表评论</h3>
+    <form action="/article_comment.do?articleId={{article.id}}" method="post">
+        <div class="form-group">
+            <!--<label for="content1">评论内容</label>-->
+            <textarea id="content1" name="content" rows="5" class="form-control" onkeyup="check_content()"></textarea><span id="tishi2"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" onmouseover="check()">发表评论</button>
+    </form>
+
+    <!-- comment -->
+    <h3>热门评论</h3>
+    {% for comment in comments %}
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>{{comment.name}}</strong></div>
+        <div class="panel-body">
+            {{comment.content}}
+        </div>
+        <div class="panel-footer">
+            <span style="color: #777777;">{{comment.time}}</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>

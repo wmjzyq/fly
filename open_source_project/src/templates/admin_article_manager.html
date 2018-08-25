@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章管理</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+</head>
+<body>
+
+{% include "nav.html" %}
+
+<div class="container">
+
+    <h3 class="text-center">文章管理</h3><br/>
+    <form action="/admin_article_manager.do" method="post" class="form-inline">
+    <div class="form-group">
+        <input name="name" id="name" type="text" class="form-control" placeholder="作者（老铁！最好别空着）">
+        <input name="date" id="date" type="date" class="form-control" placeholder="请输入查询日期">
+        <button class="btn btn-primary">查询</button>
+    </div>
+    </form><br/>
+
+    {% for article in articles %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <a href="/article_detail?id={{article.id}}"> {{article.title}}</a>&nbsp;&nbsp;
+            <span style="color:#777;">{{article.time}}</span>
+        </div>
+        <div class="panel-footer">
+            <a href="/admin_article_delete?id={{article.id}}" class="btn btn-danger">删除文章</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改信息</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <style>
+        h1 {
+            size: 20px;
+        }
+
+        .content {
+            width: 40%;
+            margin: 50px auto;
+        }
+    </style>
+    <script>
+        function check(form){
+            var passwd = $.trim(form.password.value);
+            var regPasswd = /^[a-zA-Z]\w{5,17}$/;
+            if (passwd == ''){
+    			$("#tishi1").html("密码不能为空");
+                $("#tishi1").css("color","red");
+                return false;
+    		}
+            if (regPasswd.test(passwd) == false){
+    			$("#tishi1").html("密码不符合规范（6~18位，只能包含字母、数字和下划线，必须以字母开头）");
+                $("#tishi1").css("color","red");
+                return false;
+    		}
+    		return true;
+        }
+
+    </script>
+</head>
+<body>
+
+{% include "nav.html" %}
+
+<div class="content">
+    <h1 class="text-center">修改信息</h1>
+    <form action="/change.do" method="post" onsubmit="return check(this)">
+        <div class="form-group">
+            <label for="username">用户名</label>
+            <input readonly alt="不能修改用户名" name="username" type="text" class="form-control" id="username"
+                   value="{{username}}">
+        </div>
+        <div class="form-group">
+            <label for="password">密码</label>
+            <input name="password" type="password" class="form-control" id="password" value="{{password}}"><span id="tishi1"></span>
+        </div>
+
+        <button type="submit" class="btn btn-danger">修改信息</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script src="../static/jquery-3.3.1.js" type="text/javascript"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+
+    <style>
+        h1{
+            size: 20px;
+        }
+        .content{
+            width: 40%;
+            margin: 50px auto;
+        }
+    </style>
+    <script>
+    	function check(form){
+    		var name = $.trim(form.username.value);
+    		var passwd = $.trim(form.password.value);
+    		var repasswd = $.trim(form.repassword.value);
+    		var regUserName=/^[A-Za-z\u4e00-\u9fa5]{2,15}$/;
+    		var regPasswd = /^[a-zA-Z]\w{5,17}$/;
+    		if (name == ''){
+    			$("#tishi1").html("用户名不能为空");
+                $("#tishi1").css("color","red");
+                return false;
+    		}
+    		if (regUserName.test(name) == false){
+    			$("#tishi1").html("用户名不符合规范（2~15字符,汉字或者字母）");
+                $("#tishi1").css("color","red");
+                return false;
+    		}
+    		if (passwd == ''){
+    			$("#tishi2").html("密码不能为空");
+                $("#tishi2").css("color","red");
+                return false;
+    		}
+    		if (regPasswd.test(passwd) == false){
+    			$("#tishi2").html("密码不符合规范（6~18位，只能包含字母、数字和下划线，必须以字母开头）");
+                $("#tishi2").css("color","red");
+                return false;
+    		}
+    		if (repasswd != passwd){
+    			$("#tishi3").html("两次密码不一致");
+                $("#tishi3").css("color","red");
+                return false;
+    		}
+    		return true;
+    	}
+    </script>
+
+</head>
+<body>
+<div class="content">
+    <h1 class="text-center">用户注册</h1>
+    <form action="/register.do" method="post" onsubmit="return check(this)">
+        <div class="form-group">
+            <label for="username">用户名</label>
+            <input name="username" type="text" class="form-control" id="username" placeholder="请输入用户名"><span id="tishi1"></span>
+        </div>
+        <div class="form-group">
+            <label for="password">密码</label>
+            <input name="password" type="password" class="form-control" id="password" placeholder="请设置登录密码"><span id="tishi2"></span>
+        </div>
+        <div class="form-group">
+            <label for="repassword">确认密码</label>
+            <input name="repassword" type="password" class="form-control" id="repassword" placeholder="请再次填写密码"><span id="tishi3"></span>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="status" value="simple" checked>
+                普通用户
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="status" value="reporter">
+                新闻记者
+            </label>
+        </div>
+        <button type="submit" class="btn btn-default btn-block">注册</button>
+    </form>
+</div>
+</body>
+</html>

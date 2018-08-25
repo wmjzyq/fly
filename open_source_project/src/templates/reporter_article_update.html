@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改文章</title>
+    <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script type="text/javascript">
+        function beforeSubmit(form) {
+            var content = CKEDITOR.instances.content.getData();
+			if (form.title.value == ''){
+				form.title.focus();
+				$('#tishi1').html('标题不能为空');
+                $('#tishi1').css("color","red");
+				return false;
+			}
+            if (content == ''){
+            	$('#tishi2').html('内容不能为空');
+                $('#tishi2').css("color","red");
+               	CKEDITOR.instances.content.focus();
+				return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+{% include "nav.html" %}
+
+<div class="container">
+    <h3 class="text-center">修 改 文 章</h3>
+    <form action="/article_update.do?id={{article.id}}" method="post" onSubmit="return beforeSubmit(this);">
+        <div class="form-group">
+            <label for="title">文章标题</label>
+            <input value="{{article.title}}" type="text" name="title" class="form-control" id="title" placeholder="文章标题">
+        </div>
+        <div class="form-group">
+            <label for="content">文章内容</label>
+            <textarea rows="35" name="content" class="form-control" id="content">
+                {{article.content}}
+            </textarea><span id="tishi2"></span>
+            <script type="text/javascript">
+                CKEDITOR.replace('content', {
+	            filebrowserUploadUrl: '/ckupload/',
+                });
+            </script>
+        </div>
+        <button type="submit" class="btn btn-primary pull-right">Submit</button>
+    </form>
+</div>
+</body>
+</html>

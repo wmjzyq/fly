@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+</head>
+<body>
+
+{% include "nav.html" %}
+
+
+<div class="container">
+
+    <h3 class="text-center">用户管理</h3>
+
+    {% for user in simpleUser %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            姓名：{{user.username}}<br>
+            身份：普通用户
+        </div>
+        <div class="panel-footer">
+            <a href="/user_delete?id={{user.id}}&status=simple" class="btn btn-danger">删除用户</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% for user in reporterUser %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            姓名：{{user.username}}<br>
+            身份：新闻记者
+        </div>
+        <div class="panel-footer">
+            <a href="/user_delete?id={{user.id}}&status=reporter" class="btn btn-danger">删除用户</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>

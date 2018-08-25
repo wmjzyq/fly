@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>反馈管理</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+</head>
+<body>
+
+{% include "nav.html" %}
+
+<div class="container">
+
+    <h3 class="text-center">反馈管理</h3>
+
+    {% for backfeed in backfeeds %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {{backfeed.content}}
+        </div>
+        <div class="panel-footer">
+            <a href="/backfeed_delete?id={{backfeed.id}}" class="btn btn-danger">删除反馈</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>

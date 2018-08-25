@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户反馈</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script type="text/javascript">
+        function Check(form){
+    	    var text = $.trim(form.content.value);
+            if(text.length == 0){
+			    $('#tishi1').html('内容不能为空');
+                $('#tishi1').css("color","red");
+                return false;
+            }
+            return true;
+            }
+    </script>
+</head>
+<body>
+
+{% include "nav.html" %}
+
+<div class="container">
+    <h3 class="text-center">用 户 反 馈</h3>
+    <form action="/backfeed.do" method="post" onSubmit="return Check(this);">
+        <div class="form-group">
+            <textarea rows="15" name="content" class="form-control" id="content"></textarea><span id="tishi1"></span>
+        </div>
+        <button type="submit" class="btn btn-primary pull-right">Submit</button>
+    </form>
+</div>
+</body>
+</html>
